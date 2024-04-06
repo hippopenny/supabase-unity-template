@@ -23,15 +23,30 @@ namespace com.example
 		private Client? _client;
 
 		public Client? Supabase() => _client;
+		public static SupabaseManager Instance;
 
 		private async void Start()
 		{
-			SupabaseOptions options = new();
-			// We set an option to refresh the token automatically using a background thread.
-			options.AutoRefreshToken = true;
+			// Create a new instance of SupabaseOptions
+			if (Instance == null)
+			{
+				Instance = this;
+				DontDestroyOnLoad(gameObject);
+			}
+			else
+			{
+				Destroy(gameObject);
+				return;
+			}
+			Debug.Log("Create Instance", gameObject);
+            SupabaseOptions options = new()
+            {
+                // We set an option to refresh the token automatically using a background thread.
+                AutoRefreshToken = true
+            };
 
-			// We start setting up the client here
-			Client client = new(SupabaseSettings.SupabaseURL, SupabaseSettings.SupabaseAnonKey, options);
+            // We start setting up the client here
+            Client client = new(SupabaseSettings.SupabaseURL, SupabaseSettings.SupabaseAnonKey, options);
 
 			// The first thing we do is attach the debug listener
 			client.Auth.AddDebugListener(DebugListener!);

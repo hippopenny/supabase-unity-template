@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474c40570ba0f4470a2795a9b87dd84a, type: 3}
   m_Name: Localhost Development Server
   m_EditorClassIdentifier: 
-  SupabaseURL: http://localhost:54321
-  SupabaseAnonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+  SupabaseURL: https://orjxvbxtwxanwtcwxaug.supabase.co
+  SupabaseAnonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yanh2Ynh0d3hhbnd0Y3d4YXVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE1NTkwODcsImV4cCI6MjAyNzEzNTA4N30.kYn6VRTlrL3JnFGWb0EcGO-GU2_G3JbOz0b9nD81XLI
