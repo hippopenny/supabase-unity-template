@@ -12,8 +12,6 @@ namespace com.example
 		// Public Unity References
 		public TMP_InputField EmailInput = null!;
 		public TMP_InputField PasswordInput = null!;
-		public TMP_Text ErrorText = null!;
-
 		protected override void Update()
 		{
 			base.Update();
@@ -24,11 +22,11 @@ namespace com.example
 			try
 			{
 				Session session = (await SupabaseManager.Instance.Supabase()!.Auth.SignUp(EmailInput.text, PasswordInput.text))!;
-				ErrorText.text = $"Success! Signed Up as {session.User?.Email}";
+				MessageText.text = $"Success! Signed Up as {session.User?.Email}";
 			}
 			catch (GotrueException goTrueException)
 			{
-				ErrorText.text = $"{goTrueException.Reason} {goTrueException.Message}";
+				MessageText.text = $"{goTrueException.Reason} {goTrueException.Message}";
 				Debug.Log(goTrueException.Message, gameObject);
 				Debug.LogException(goTrueException, gameObject);
 			}
@@ -43,11 +41,11 @@ namespace com.example
 			try
 			{
 				Session session = (await SupabaseManager.Instance.Supabase()!.Auth.SignIn(EmailInput.text, PasswordInput.text))!;
-				ErrorText.text = $"Success! Signed In as {session.User?.Email}";
+				MessageText.text = $"Success! Signed In as {session.User?.Email}";
 			}
 			catch (GotrueException goTrueException)
 			{
-				ErrorText.text = $"{goTrueException.Reason} {goTrueException.Message}";
+				MessageText.text = $"{goTrueException.Reason} {goTrueException.Message}";
 				Debug.Log(goTrueException.Message, gameObject);
 				Debug.LogException(goTrueException, gameObject);
 			}

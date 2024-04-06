@@ -9,9 +9,15 @@ namespace com.example
 {
 	public class Provider : MonoBehaviour
 	{
+		public TMP_Text MessageText = null!;
 		private bool _doSignUp;
 		private bool _doSignOut;
         private bool _doSignIn;
+		protected static SignInOptions options = new SignInOptions
+		{
+			FlowType = Constants.OAuthFlowType.PKCE,
+			RedirectTo = ""
+		};
 		// Unity does not allow async UI events, so we set a flag and use Update() to do the async work
 		public void SignUp()
 		{
@@ -54,7 +60,8 @@ namespace com.example
 		}
 		protected virtual async Task PerformSignUp()
 		{
-            await Task.CompletedTask;
+            MessageText.text = "Sign Up is not supported with this provider";
+			await Task.CompletedTask;
 		}
 
 		protected virtual async Task PerformSignIn()
