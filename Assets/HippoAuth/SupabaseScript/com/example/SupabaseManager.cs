@@ -1,4 +1,5 @@
 using System;
+using PlasticGui.Diff;
 using Supabase;
 using Supabase.Gotrue;
 using TMPro;
@@ -69,7 +70,8 @@ namespace HippoAuth
 			// Allow unconfirmed user sessions. If you turn this on you will have to complete the
 			// email verification flow before you can use the session.
 			client.Auth.Options.AllowUnconfirmedUserSessions = true;
-
+			if (client.Auth.CurrentSession != null)
+				Debug.Log(client.Auth.CurrentSession.AccessToken);
 			// We check the network status to see if we are online or offline using a request to fetch
 			// the server settings from our project. Here's how we build that URL.
 			string url = $"{SupabaseSettings.SupabaseURL}/auth/v1/settings?apikey={SupabaseSettings.SupabaseAnonKey}";
