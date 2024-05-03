@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using HippoAuth;
 public class DeepLinkManager : MonoBehaviour
 {
-    public static DeepLinkManager Instance { get; private set; }
-    public string deeplinkURL;
+    public static DeepLinkManager? Instance { get; private set; }
+    public string? deeplinkURL;
     private void Awake()
     {
         if (Instance == null)

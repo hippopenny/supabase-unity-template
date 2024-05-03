@@ -24,7 +24,7 @@ namespace HippoAuth
 		private Client? _client;
 
 		public Client? Supabase() => _client;
-		public static SupabaseManager Instance;
+		public static SupabaseManager? Instance;
 
 		private async void Start()
 		{
