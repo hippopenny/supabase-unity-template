@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Must edit here -->
-                <data android:scheme="com.hippopenny.supabaseexample" android:host="login-callback" />
+                <data android:scheme="com.hippopenny.supabaseexample" android:host="" />
             </intent-filter>
         </activity>
     </application>

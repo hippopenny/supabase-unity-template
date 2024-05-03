@@ -12,10 +12,16 @@ namespace HippoAuth
 		private bool _doSignUp;
 		private bool _doSignOut;
         private bool _doSignIn;
-		protected static SignInOptions options = new SignInOptions
-		{
-			RedirectTo = "com.hippopenny.supabaseexample://login-callback/"
-		};
+
+		protected static SignInOptions options;
+
+		public void Awake(){
+			options = new SignInOptions{
+				// App id + "://" + "login-callback/", for example com.hippopenny.skellyrun://login-callback/
+				RedirectTo = Application.identifier + "://" + "login-callback/"
+			};
+		}
+		
 		// Unity does not allow async UI events, so we set a flag and use Update() to do the async work
 		public void SignUp()
 		{
