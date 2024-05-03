@@ -1,5 +1,5 @@
 using System;
-using PlasticGui.Diff;
+using System.Collections.Generic;
 using Supabase;
 using Supabase.Gotrue;
 using TMPro;
@@ -39,16 +39,15 @@ namespace HippoAuth
 				Destroy(gameObject);
 				return;
 			}
-			Debug.Log("Create Instance", gameObject);
             SupabaseOptions options = new()
             {
                 // We set an option to refresh the token automatically using a background thread.
                 AutoRefreshToken = true
             };
 
-            // We start setting up the client here
-            Client client = new(SupabaseSettings.SupabaseURL, SupabaseSettings.SupabaseAnonKey, options);
-
+			// We start setting up the client here
+			Client client = new(SupabaseSettings.SupabaseURL, SupabaseSettings.SupabaseAnonKey, options);
+			
 			// The first thing we do is attach the debug listener
 			client.Auth.AddDebugListener(DebugListener!);
 
@@ -70,8 +69,6 @@ namespace HippoAuth
 			// Allow unconfirmed user sessions. If you turn this on you will have to complete the
 			// email verification flow before you can use the session.
 			client.Auth.Options.AllowUnconfirmedUserSessions = true;
-			if (client.Auth.CurrentSession != null)
-				Debug.Log(client.Auth.CurrentSession.AccessToken);
 			// We check the network status to see if we are online or offline using a request to fetch
 			// the server settings from our project. Here's how we build that URL.
 			string url = $"{SupabaseSettings.SupabaseURL}/auth/v1/settings?apikey={SupabaseSettings.SupabaseAnonKey}";
@@ -96,11 +93,7 @@ namespace HippoAuth
 			}
 			if (client.Auth.Online)
 			{
-				// Now we start up the client, which will in turn start up the background thread.
-				// This will attempt to refresh the session token, which in turn may send a second
-				// user login event to the UnityAuthListener.
-				await client.InitializeAsync();
-
+				await client.Auth.RetrieveSessionAsync();
 				// Here we fetch the server settings and log them to the console
 				Settings serverConfiguration = (await client.Auth.Settings())!;
 				Debug.Log($"Auto-confirm emails on this server: {serverConfiguration.MailerAutoConfirm}");
